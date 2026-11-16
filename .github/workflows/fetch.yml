@@ -16,41 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Resolve full dependency closure
-        continue-on-error: true
-        run: |
-          set -u
-          mkdir -p probe
-          cat > probe/settings.gradle <<'EOF'
-          rootProject.name = 'probe'
-          EOF
-          cat > probe/build.gradle <<'EOF'
-          plugins { id 'java' }
-          repositories {
-              maven { url = 'https://maven.neoforged.net/releases' }
-              mavenCentral()
-              maven { url = 'https://maven.minecraftforge.net/' }
-          }
-          configurations { nfrt }
-          dependencies { nfrt 'net.neoforged:neoform-runtime:2.0.31' }
-          tasks.register('dump') {
-              doLast {
-                  configurations.nfrt.resolvedConfiguration.resolvedArtifacts.each { a ->
-                      println a.moduleVersion.id.group + ':' + a.moduleVersion.id.name + ':' + a.moduleVersion.id.version
-                  }
-              }
-          }
-          EOF
-          cd probe
-          (gradle --no-daemon -q dump 2> ../resolve-err.txt || true) | sort -u > ../resolved.txt
-          cd ..
-          echo "---- resolved ----"
-          cat resolved.txt || true
-          echo "---- err (tail) ----"
-          tail -20 resolve-err.txt || true
-
       - name: Download artifacts
-        id: dl
         continue-on-error: true
         run: |
           mkdir -p out
@@ -75,34 +41,50 @@ jobs:
             done
           }
 
-          { echo "net.neoforged:neoform-runtime:2.0.31"; cat resolved.txt 2>/dev/null || true; \
-            [ -f coords.txt ] && grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' || true; } | sort -u | grep -E '^[^:]+:[^:]+:[^:]+$' | while read -r c; do fetch "$c"; done
+          if [ -f coords.txt ]; then
+            grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' | while read -r c; do fetch "$c"; done
+          fi
 
-          cp resolved.txt out/resolved.txt 2>/dev/null || true
           sha256sum out/*.jar out/*.pom out/*.module 2>/dev/null > out/SHA256SUMS.txt || true
-          echo "ok=1" >> "$GITHUB_OUTPUT"
+          echo "---- files ----" >> out/_download.log
+          ls -l out >> out/_download.log
+
+      - name: Publish release
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -u
+          : > out/_release.log
+          TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
+          echo "tag=$TAG" >> out/_release.log
+          ls -l out >> out/_release.log 2>&1 || true
+          files=()
+          for f in out/*; do
+            case "$f" in
+              out/_download.log|out/_release.log) continue ;;
+              *) files+=("$f") ;;
+            esac
+          done
+          echo "file_count=${#files[@]}" >> out/_release.log
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "no files, skip" >> out/_release.log
+            exit 0
+          fi
+          gh release create "$TAG" "${files[@]}" \
+            --title "NeoForged artifacts $TAG" \
+            --notes "NeoForged 构件离线备份" >> out/_release.log 2>&1
+          echo "rc=$?" >> out/_release.log
 
       - name: Report status to repo
         if: always()
         run: |
           mkdir -p status
           cp out/_download.log status/last-run.log 2>/dev/null || echo "no log" > status/last-run.log
-          { echo "run: ${{ github.run_id }}"; echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"; echo "---"; cat status/last-run.log; } > status/summary.txt
+          cp out/_release.log status/last-release.log 2>/dev/null || echo "no log" > status/last-release.log
+          { echo "run: ${{ github.run_id }}"; echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"; echo "--- download ---"; cat status/last-run.log; echo "--- release ---"; cat status/last-release.log; } > status/summary.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add status
           git commit -m "status: update run report [skip ci]" || echo "no changes"
           git push || echo "push failed"
-
-      - name: Publish release assets
-        if: always()
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -u
-          if ! ls out/*.jar >/dev/null 2>&1; then echo "no jar, skip release"; exit 0; fi
-          TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
-          find out -maxdepth 1 -type f ! -name '_download.log' -print0 | xargs -0 gh release create "$TAG" \
-            --title "NeoForged artifacts $TAG" \
-            --notes "NFRT 完整依赖闭包离线备份"
-          echo "release: $TAG"
