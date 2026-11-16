@@ -16,42 +16,41 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download artifacts
+      - name: Download
         id: dl
         continue-on-error: true
         run: |
           mkdir -p out
           : > out/_download.log
-          base="https://maven.neoforged.net/releases/net/neoforged"
           ok=1
+          base="https://maven.neoforged.net/releases"
 
-          echo "== reach check" >> out/_download.log
-          curl -sS -o /dev/null -m 20 -w 'releases_root=%{http_code} time=%{time_total}s\n' "https://maven.neoforged.net/releases/" >> out/_download.log 2>&1 || echo "releases_root=ERR" >> out/_download.log
+          fetch() {
+            coord="$1"
+            g=$(echo "$coord" | cut -d: -f1)
+            a=$(echo "$coord" | cut -d: -f2)
+            v=$(echo "$coord" | cut -d: -f3)
+            path=$(echo "$g" | tr '.' '/')/$a/$v
+            echo "== $coord" >> out/_download.log
+            for ext in pom jar module sol; do
+              name="$a-$v.$ext"
+              code=$(curl -sSL --connect-timeout 15 -m 300 -o "out/$name" -w '%{http_code}' "$base/$path/$name" 2>/dev/null || echo ERR)
+              size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
+              if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then
+                echo "  OK  $name size=$size" >> out/_download.log
+              else
+                echo "  --  $name http=$code" >> out/_download.log
+                rm -f "out/$name"
+              fi
+            done
+          }
 
-          echo "== download" >> out/_download.log
-          for spec in \
-            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" \
-            "neoform-runtime/2.0.31/neoform-runtime-2.0.31-all.jar" \
-            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" \
-            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.module"; do
-            name=$(basename "$spec")
-            code=$(curl -sSL --connect-timeout 15 -m 300 -o "out/$name" -w '%{http_code}' "$base/$spec" 2>/dev/null || echo ERR)
-            size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
-            echo "$name http=$code size=$size" | tee -a out/_download.log
-            if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then :; else rm -f "out/$name"; fi
-          done
+          fetch "net.neoforged:neoform-runtime:2.0.31"
+          if [ -f coords.txt ]; then
+            grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' | while read -r c; do fetch "$c"; done
+          fi
 
-          echo "== probe minecraft-dependencies candidates" >> out/_download.log
-          for p in \
-            "minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom" \
-            "minecraft/1.20.1/minecraft-1.20.1.pom" \
-            "neoform/1.20.1/neoform-1.20.1.pom" \
-            "neoform/maven-metadata.xml" ; do
-            code=$(curl -sS -o /dev/null -m 30 -w '%{http_code}' "$base/$p" 2>/dev/null || echo ERR)
-            echo "probe $p -> $code" >> out/_download.log
-          done
-
-          echo "ALL_OK=$ok" | tee -a out/_download.log
+          echo "ALL_OK=$ok" >> out/_download.log
           sha256sum out/*.jar out/*.pom out/*.module 2>/dev/null > out/SHA256SUMS.txt || true
           echo "ok=$ok" >> "$GITHUB_OUTPUT"
 
@@ -83,5 +82,5 @@ jobs:
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
           find out -maxdepth 1 -type f ! -name '_download.log' -print0 | xargs -0 gh release create "$TAG" \
             --title "NeoForged artifacts $TAG" \
-            --notes "NFRT jar/all.jar/pom/module 离线备份"
+            --notes "由 coords.txt 驱动的构件离线备份"
           echo "release: $TAG"
