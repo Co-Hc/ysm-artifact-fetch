@@ -1,70 +1,13 @@
 == reach check
-releases_root=200 time=0.168698s
-== version dir listing
-./neoform-runtime-2.0.31-all.jar.md5
-./neoform-runtime-2.0.31-all.jar.sha1
-./neoform-runtime-2.0.31-all.jar.sha256
-./neoform-runtime-2.0.31-all.jar.sha512
-./neoform-runtime-2.0.31-all.jar
-./neoform-runtime-2.0.31-changelog.txt.md5
-./neoform-runtime-2.0.31-changelog.txt.sha1
-./neoform-runtime-2.0.31-changelog.txt.sha256
-./neoform-runtime-2.0.31-changelog.txt.sha512
-./neoform-runtime-2.0.31-changelog.txt
-./neoform-runtime-2.0.31.jar.md5
-./neoform-runtime-2.0.31.jar.sha1
-./neoform-runtime-2.0.31.jar.sha256
-./neoform-runtime-2.0.31.jar.sha512
-./neoform-runtime-2.0.31.jar
-./neoform-runtime-2.0.31.module.md5
-./neoform-runtime-2.0.31.module.sha1
-./neoform-runtime-2.0.31.module.sha256
-./neoform-runtime-2.0.31.module.sha512
-./neoform-runtime-2.0.31.module
-./neoform-runtime-2.0.31.pom.md5
-./neoform-runtime-2.0.31.pom.sha1
-./neoform-runtime-2.0.31.pom.sha256
-./neoform-runtime-2.0.31.pom.sha512
-./neoform-runtime-2.0.31.pom
-./neoform-runtime-2.0.31-sources.jar.md5
-./neoform-runtime-2.0.31-sources.jar.sha1
-./neoform-runtime-2.0.31-sources.jar.sha256
-./neoform-runtime-2.0.31-sources.jar.sha512
-./neoform-runtime-2.0.31-sources.jar
-<!DOCTYPE html>
-<html lang='en'>
-    <head>
-        <title>Index of /releases/net/neoforged/neoform-runtime/2.0.31/</title>
-        <meta charset='utf-8'>
-        <base href='/releases/net/neoforged/neoform-runtime/2.0.31/'>
-        <style>
-        li {
-            padding: 2px 10px;
-        }
-        .back::marker {
-            content: '🔙';
-        }
-        .directory::marker {
-            content: '📁';
-        }
-        .file::marker {
-            content: '📄';
-        }
-        </style>
-    </head>
-    <body>
-        <h1>Index of /releases/net/neoforged/neoform-runtime/2.0.31/</h1>
-        <ul>
-            <li class='back'>
-                <a href='/releases/net/neoforged/neoform-runtime'>Parent Directory</a>
-            </li>
-            <li class="file"><a href="./neoform-runtime-2.0.31-all.jar.md5">neoform-runtime-2.0.31-all.jar.md5</a></li><li class="file"><a href="./neoform-runtime-2.0.31-all.jar.sha1">neoform-runtime-2.0.31-all.jar.sha1</a></li><li class="file"><a href="./neoform-runtime-2.0.31-all.jar.sha256">neoform-runtime-2.0.31-all.jar.sha256</a></li><li class="file"><a href="./neoform-runtime-2.0.31-all.jar.sha512">neoform-runtime-2.0.31-all.jar.sha512</a></li><li class="file"><a href="./neoform-runtime-2.0.31-all.jar">neoform-runtime-2.0.31-all.jar</a></li><li class="file"><a href="./neoform-runtime-2.0.31-changelog.txt.md5">neoform-runtime-2.0.31-changelog.txt.md5</a></li><li class="file"><a href="./neoform-runtime-2.0.31-changelog.txt.sha1">neoform-runtime-2.0.31-changelog.txt.sha1</a></li><li class="file"><a href="./neoform-runtime-2.0.31-changelog.txt.sha256">neoform-runtime-2.0.31-changelog.txt.sha256</a></li><li class="file"><a href="./neoform-runtime-2.0.31-changelog.txt.sha512">neoform-runtime-2.0.31-changelog.txt.sha512</a></li><li class="file"><a href="./neoform-runtime-2.0.31-changelog.txt">neoform-runtime-2.0.31-changelog.txt</a></li><li class="file"><a href="./neoform-runtime-2.0.31.jar.md5">neoform-runtime-2.0.31.jar.md5</a><== download
+releases_root=200 time=0.080515s
+== download
 neoform-runtime-2.0.31.jar http=200 size=307933
+neoform-runtime-2.0.31-all.jar http=200 size=4483539
 neoform-runtime-2.0.31.pom http=200 size=3878
 neoform-runtime-2.0.31.module http=200 size=7357
-== probe extra coordinates
-probe neoform-runtime-external-tools/2.0.31/neoform-runtime-external-tools-2.0.31.pom -> 404
+== probe minecraft-dependencies candidates
 probe minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom -> 404
-probe minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module -> 404
-probe minecraft-dependencies/maven-metadata.xml -> 404
+probe minecraft/1.20.1/minecraft-1.20.1.pom -> 404
+probe neoform/1.20.1/neoform-1.20.1.pom -> 404
+probe neoform/maven-metadata.xml -> 200
 ALL_OK=1
