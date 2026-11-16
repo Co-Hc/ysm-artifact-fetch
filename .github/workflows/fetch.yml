@@ -1,0 +1,51 @@
+name: fetch-neoforged-artifacts
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Download artifacts from maven.neoforged.net
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          base="https://maven.neoforged.net/releases/net/neoforged"
+
+          fetch() {
+            local url="$1"
+            local dest="$2"
+            echo "==> $url"
+            curl -fSL --retry 3 --retry-delay 2 --connect-timeout 20 -m 180 -o "out/$dest" "$url"
+            ls -l "out/$dest"
+          }
+
+          fetch "$base/neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" "neoform-runtime-2.0.31.jar"
+          fetch "$base/neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" "neoform-runtime-2.0.31.pom"
+          fetch "$base/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom" "minecraft-dependencies-1.20.1.pom"
+
+          echo "==> 附加元数据（失败不阻断）"
+          curl -fsSL -m 60 -o out/neoform-runtime-maven-metadata.xml "$base/neoform-runtime/maven-metadata.xml" || true
+          curl -fsSL -m 60 -o out/minecraft-dependencies-maven-metadata.xml "$base/minecraft-dependencies/maven-metadata.xml" || true
+
+          echo "==> 附清单"
+          cd out
+          sha256sum * > SHA256SUMS.txt || true
+          ls -l
+
+      - name: Publish release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
+          gh release create "$TAG" out/* \
+            --title "NeoForged artifacts $TAG" \
+            --notes "从 maven.neoforged.net 抓取的离线构件备份（neoform-runtime 2.0.31 + minecraft-dependencies 1.20.1）"
+          echo "release: $TAG"
