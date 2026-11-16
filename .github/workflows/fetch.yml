@@ -25,13 +25,13 @@ jobs:
           base="https://maven.neoforged.net/releases/net/neoforged"
           ok=1
 
-          echo "reach_check:" >> out/_download.log
+          echo "== reach check" >> out/_download.log
           curl -sS -o /dev/null -m 20 -w 'releases_root=%{http_code} time=%{time_total}s\n' "https://maven.neoforged.net/releases/" >> out/_download.log 2>&1 || echo "releases_root=ERR" >> out/_download.log
 
+          echo "== download" >> out/_download.log
           for spec in \
             "neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" \
-            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" \
-            "minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom"; do
+            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom"; do
             name=$(basename "$spec")
             code=$(curl -sSL --connect-timeout 15 -m 180 -o "out/$name" -w '%{http_code}' "$base/$spec" 2>/dev/null || echo ERR)
             size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
@@ -39,10 +39,21 @@ jobs:
             if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then :; else ok=0; rm -f "out/$name"; fi
           done
 
-          curl -fsSL -m 60 -o out/neoform-runtime-maven-metadata.xml "$base/neoform-runtime/maven-metadata.xml" || true
-          curl -fsSL -m 60 -o out/minecraft-dependencies-maven-metadata.xml "$base/minecraft-dependencies/maven-metadata.xml" || true
+          echo "== directory listings" >> out/_download.log
+          curl -sSL -m 60 -o out/listing-neoforged-root.html "https://maven.neoforged.net/releases/net/neoforged/" || true
+          curl -sSL -m 60 -o out/listing-minecraft-dependencies.html "$base/minecraft-dependencies/" || true
+          curl -sSL -m 60 -o out/listing-neoform-runtime.html "$base/neoform-runtime/" || true
+          for f in out/listing-*.html; do
+            [ -f "$f" ] || continue
+            echo "--- $f" >> out/_download.log
+            grep -oE 'href="[^"]+"' "$f" | sed 's/href=//;s/"//g' | head -80 >> out/_download.log || true
+          done
+
+          echo "== metadata" >> out/_download.log
+          curl -sSL -m 60 -o out/minecraft-dependencies-maven-metadata.xml "$base/minecraft-dependencies/maven-metadata.xml" -w 'mcd_meta=%{http_code}\n' >> out/_download.log 2>&1 || echo "mcd_meta=ERR" >> out/_download.log
+
           echo "ALL_OK=$ok" | tee -a out/_download.log
-          sha256sum out/* 2>/dev/null > out/SHA256SUMS.txt || true
+          sha256sum out/*.jar out/*.pom 2>/dev/null > out/SHA256SUMS.txt || true
           echo "ok=$ok" >> "$GITHUB_OUTPUT"
 
       - name: Report status to repo
@@ -57,7 +68,6 @@ jobs:
             echo "---"
             cat status/last-run.log
           } > status/summary.txt
-          cat status/summary.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add status
@@ -65,13 +75,14 @@ jobs:
           git push || echo "push failed"
 
       - name: Publish release assets
-        if: steps.dl.outputs.ok == '1'
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -euo pipefail
+          set -u
+          if ! ls out/*.jar >/dev/null 2>&1; then echo "no jar, skip release"; exit 0; fi
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
-          gh release create "$TAG" out/*.jar out/*.pom out/SHA256SUMS.txt \
+          find out -maxdepth 1 -type f ! -name '_download.log' -print0 | xargs -0 gh release create "$TAG" \
             --title "NeoForged artifacts $TAG" \
-            --notes "从 maven.neoforged.net 抓取的离线构件备份（neoform-runtime 2.0.31 + minecraft-dependencies 1.20.1）"
+            --notes "从 maven.neoforged.net 抓取；含 NFRT 与仓库目录清单"
           echo "release: $TAG"
