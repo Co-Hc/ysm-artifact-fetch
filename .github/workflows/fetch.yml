@@ -16,13 +16,45 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download
+      - name: Resolve full dependency closure
+        continue-on-error: true
+        run: |
+          set -u
+          mkdir -p probe
+          cat > probe/settings.gradle <<'EOF'
+          rootProject.name = 'probe'
+          EOF
+          cat > probe/build.gradle <<'EOF'
+          plugins { id 'java' }
+          repositories {
+              maven { url = 'https://maven.neoforged.net/releases' }
+              mavenCentral()
+              maven { url = 'https://maven.minecraftforge.net/' }
+          }
+          configurations { nfrt }
+          dependencies { nfrt 'net.neoforged:neoform-runtime:2.0.31' }
+          tasks.register('dump') {
+              doLast {
+                  configurations.nfrt.resolvedConfiguration.resolvedArtifacts.each { a ->
+                      println a.moduleVersion.id.group + ':' + a.moduleVersion.id.name + ':' + a.moduleVersion.id.version
+                  }
+              }
+          }
+          EOF
+          cd probe
+          (gradle --no-daemon -q dump 2> ../resolve-err.txt || true) | sort -u > ../resolved.txt
+          cd ..
+          echo "---- resolved ----"
+          cat resolved.txt || true
+          echo "---- err (tail) ----"
+          tail -20 resolve-err.txt || true
+
+      - name: Download artifacts
         id: dl
         continue-on-error: true
         run: |
           mkdir -p out
           : > out/_download.log
-          ok=1
           base="https://maven.neoforged.net/releases"
 
           fetch() {
@@ -31,41 +63,31 @@ jobs:
             a=$(echo "$coord" | cut -d: -f2)
             v=$(echo "$coord" | cut -d: -f3)
             path=$(echo "$g" | tr '.' '/')/$a/$v
-            echo "== $coord" >> out/_download.log
-            for ext in pom jar module sol; do
+            for ext in pom jar module; do
               name="$a-$v.$ext"
               code=$(curl -sSL --connect-timeout 15 -m 300 -o "out/$name" -w '%{http_code}' "$base/$path/$name" 2>/dev/null || echo ERR)
               size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
               if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then
-                echo "  OK  $name size=$size" >> out/_download.log
+                echo "OK  $coord $ext $size" >> out/_download.log
               else
-                echo "  --  $name http=$code" >> out/_download.log
                 rm -f "out/$name"
               fi
             done
           }
 
-          fetch "net.neoforged:neoform-runtime:2.0.31"
-          if [ -f coords.txt ]; then
-            grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' | while read -r c; do fetch "$c"; done
-          fi
+          { echo "net.neoforged:neoform-runtime:2.0.31"; cat resolved.txt 2>/dev/null || true; \
+            [ -f coords.txt ] && grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' || true; } | sort -u | grep -E '^[^:]+:[^:]+:[^:]+$' | while read -r c; do fetch "$c"; done
 
-          echo "ALL_OK=$ok" >> out/_download.log
+          cp resolved.txt out/resolved.txt 2>/dev/null || true
           sha256sum out/*.jar out/*.pom out/*.module 2>/dev/null > out/SHA256SUMS.txt || true
-          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+          echo "ok=1" >> "$GITHUB_OUTPUT"
 
       - name: Report status to repo
         if: always()
         run: |
           mkdir -p status
           cp out/_download.log status/last-run.log 2>/dev/null || echo "no log" > status/last-run.log
-          {
-            echo "run: ${{ github.run_id }}"
-            echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            echo "ok: ${{ steps.dl.outputs.ok }}"
-            echo "---"
-            cat status/last-run.log
-          } > status/summary.txt
+          { echo "run: ${{ github.run_id }}"; echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"; echo "---"; cat status/last-run.log; } > status/summary.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add status
@@ -82,5 +104,5 @@ jobs:
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
           find out -maxdepth 1 -type f ! -name '_download.log' -print0 | xargs -0 gh release create "$TAG" \
             --title "NeoForged artifacts $TAG" \
-            --notes "由 coords.txt 驱动的构件离线备份"
+            --notes "NFRT 完整依赖闭包离线备份"
           echo "release: $TAG"
