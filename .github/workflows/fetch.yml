@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'status/**'
 
 permissions:
   contents: write
@@ -12,40 +14,64 @@ jobs:
   fetch:
     runs-on: ubuntu-22.04
     steps:
-      - name: Download artifacts from maven.neoforged.net
+      - uses: actions/checkout@v4
+
+      - name: Download artifacts
+        id: dl
+        continue-on-error: true
         run: |
-          set -euo pipefail
           mkdir -p out
+          : > out/_download.log
           base="https://maven.neoforged.net/releases/net/neoforged"
+          ok=1
 
-          fetch() {
-            local url="$1"
-            local dest="$2"
-            echo "==> $url"
-            curl -fSL --retry 3 --retry-delay 2 --connect-timeout 20 -m 180 -o "out/$dest" "$url"
-            ls -l "out/$dest"
-          }
+          echo "reach_check:" >> out/_download.log
+          curl -sS -o /dev/null -m 20 -w 'releases_root=%{http_code} time=%{time_total}s\n' "https://maven.neoforged.net/releases/" >> out/_download.log 2>&1 || echo "releases_root=ERR" >> out/_download.log
 
-          fetch "$base/neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" "neoform-runtime-2.0.31.jar"
-          fetch "$base/neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" "neoform-runtime-2.0.31.pom"
-          fetch "$base/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom" "minecraft-dependencies-1.20.1.pom"
+          for spec in \
+            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" \
+            "neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" \
+            "minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom"; do
+            name=$(basename "$spec")
+            code=$(curl -sSL --connect-timeout 15 -m 180 -o "out/$name" -w '%{http_code}' "$base/$spec" 2>/dev/null || echo ERR)
+            size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
+            echo "$name http=$code size=$size" | tee -a out/_download.log
+            if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then :; else ok=0; rm -f "out/$name"; fi
+          done
 
-          echo "==> 附加元数据（失败不阻断）"
           curl -fsSL -m 60 -o out/neoform-runtime-maven-metadata.xml "$base/neoform-runtime/maven-metadata.xml" || true
           curl -fsSL -m 60 -o out/minecraft-dependencies-maven-metadata.xml "$base/minecraft-dependencies/maven-metadata.xml" || true
+          echo "ALL_OK=$ok" | tee -a out/_download.log
+          sha256sum out/* 2>/dev/null > out/SHA256SUMS.txt || true
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
 
-          echo "==> 附清单"
-          cd out
-          sha256sum * > SHA256SUMS.txt || true
-          ls -l
+      - name: Report status to repo
+        if: always()
+        run: |
+          mkdir -p status
+          cp out/_download.log status/last-run.log 2>/dev/null || echo "no log" > status/last-run.log
+          {
+            echo "run: ${{ github.run_id }}"
+            echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "ok: ${{ steps.dl.outputs.ok }}"
+            echo "---"
+            cat status/last-run.log
+          } > status/summary.txt
+          cat status/summary.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add status
+          git commit -m "status: update run report [skip ci]" || echo "no changes"
+          git push || echo "push failed"
 
       - name: Publish release assets
+        if: steps.dl.outputs.ok == '1'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
-          gh release create "$TAG" out/* \
+          gh release create "$TAG" out/*.jar out/*.pom out/SHA256SUMS.txt \
             --title "NeoForged artifacts $TAG" \
             --notes "从 maven.neoforged.net 抓取的离线构件备份（neoform-runtime 2.0.31 + minecraft-dependencies 1.20.1）"
           echo "release: $TAG"
