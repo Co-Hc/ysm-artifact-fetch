@@ -28,31 +28,25 @@ jobs:
           echo "== reach check" >> out/_download.log
           curl -sS -o /dev/null -m 20 -w 'releases_root=%{http_code} time=%{time_total}s\n' "https://maven.neoforged.net/releases/" >> out/_download.log 2>&1 || echo "releases_root=ERR" >> out/_download.log
 
-          echo "== version dir listing" >> out/_download.log
-          curl -sSL -m 60 -o out/listing-nfrt-2.0.31.html "$base/neoform-runtime/2.0.31/" || true
-          if [ -f out/listing-nfrt-2.0.31.html ]; then
-            grep -oE 'href="[^"]+"' out/listing-nfrt-2.0.31.html | sed 's/href=//;s/"//g' | head -60 >> out/_download.log || true
-            head -c 2000 out/listing-nfrt-2.0.31.html >> out/_download.log || true
-          fi
-
           echo "== download" >> out/_download.log
           for spec in \
             "neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar" \
+            "neoform-runtime/2.0.31/neoform-runtime-2.0.31-all.jar" \
             "neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom" \
             "neoform-runtime/2.0.31/neoform-runtime-2.0.31.module"; do
             name=$(basename "$spec")
-            code=$(curl -sSL --connect-timeout 15 -m 180 -o "out/$name" -w '%{http_code}' "$base/$spec" 2>/dev/null || echo ERR)
+            code=$(curl -sSL --connect-timeout 15 -m 300 -o "out/$name" -w '%{http_code}' "$base/$spec" 2>/dev/null || echo ERR)
             size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
             echo "$name http=$code size=$size" | tee -a out/_download.log
             if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then :; else rm -f "out/$name"; fi
           done
 
-          echo "== probe extra coordinates" >> out/_download.log
+          echo "== probe minecraft-dependencies candidates" >> out/_download.log
           for p in \
-            "neoform-runtime-external-tools/2.0.31/neoform-runtime-external-tools-2.0.31.pom" \
             "minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom" \
-            "minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module" \
-            "minecraft-dependencies/maven-metadata.xml" ; do
+            "minecraft/1.20.1/minecraft-1.20.1.pom" \
+            "neoform/1.20.1/neoform-1.20.1.pom" \
+            "neoform/maven-metadata.xml" ; do
             code=$(curl -sS -o /dev/null -m 30 -w '%{http_code}' "$base/$p" 2>/dev/null || echo ERR)
             echo "probe $p -> $code" >> out/_download.log
           done
@@ -89,5 +83,5 @@ jobs:
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
           find out -maxdepth 1 -type f ! -name '_download.log' -print0 | xargs -0 gh release create "$TAG" \
             --title "NeoForged artifacts $TAG" \
-            --notes "含 NFRT 的 jar/pom/module 与目录清单"
+            --notes "NFRT jar/all.jar/pom/module 离线备份"
           echo "release: $TAG"
