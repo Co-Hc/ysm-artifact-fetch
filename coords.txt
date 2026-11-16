@@ -1,0 +1,2 @@
+# 每行一个坐标 group:artifact:version；workflow 会去 maven.neoforged.net 拉 pom/jar/module
+net.neoforged:accesstransformers:13.0.1
