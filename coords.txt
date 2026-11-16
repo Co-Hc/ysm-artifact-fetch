@@ -1,2 +1,10 @@
 # 每行一个坐标 group:artifact:version；workflow 会去 maven.neoforged.net 拉 pom/jar/module
+net.neoforged:neoform-runtime:2.0.31
 net.neoforged:accesstransformers:13.0.1
+net.neoforged.accesstransformers:at-parser:13.0.1
+net.neoforged:AutoRenamingTool:2.0.17
+net.neoforged.jst:jst-cli-bundle:2.0.11
+net.neoforged.installertools:installertools:4.0.12
+net.neoforged:installertools:4.0.12
+net.neoforged:srgutils:1.0.10
+net.neoforged.installertools:problems-api:3.0.3
