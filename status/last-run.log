@@ -1,0 +1,6 @@
+reach_check:
+releases_root=200 time=0.129628s
+neoform-runtime-2.0.31.jar http=200 size=307933
+neoform-runtime-2.0.31.pom http=200 size=3878
+minecraft-dependencies-1.20.1.pom http=404 size=1315
+ALL_OK=0
