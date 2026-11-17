@@ -8,3 +8,4 @@ net.neoforged.installertools:installertools:4.0.12
 net.neoforged:installertools:4.0.12
 net.neoforged:srgutils:1.0.10
 net.neoforged.installertools:problems-api:3.0.3
+net.neoforged:DevLaunch:1.0.2
