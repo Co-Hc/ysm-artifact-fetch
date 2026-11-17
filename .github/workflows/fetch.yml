@@ -22,29 +22,20 @@ jobs:
           : > log.txt
           base="https://maven.neoforged.net/releases"
 
-          probe() {
-            u="$1"
-            code=$(curl -sSL --connect-timeout 15 -m 60 -o probe.out -w '%{http_code}' "$u" 2>/dev/null || echo ERR)
-            size=$(stat -c%s probe.out 2>/dev/null || echo 0)
-            echo "PROBE $code $size $u" >> log.txt
-            if [ "$code" = "200" ]; then head -c 300 probe.out >> log.txt; echo "" >> log.txt; fi
-          }
-
-          probe "$base/net/neoforged/minecraft-dependencies/"
-          probe "$base/net/neoforged/minecraft-dependencies/maven-metadata.xml"
-          probe "$base/net/neoforged/minecraft-dependencies/1.20.1/"
-          probe "$base/net/neoforged/minecraft-dependencies/1.21.1/"
-
           if [ -f paths.txt ]; then
-            grep -vE '^[[:space:]]*#' paths.txt | grep -vE '^[[:space:]]*$' | while read -r p; do
+            grep -vE '^[[:space:]]*#' paths.txt | grep -vE '^[[:space:]]*$' | while IFS= read -r line; do
+              case "$line" in
+                *'|'*) p="${line%%|*}"; u="${line#*|}" ;;
+                *) p="$line"; u="$base/$p" ;;
+              esac
               mkdir -p "repo/$(dirname "$p")"
-              code=$(curl -sSL --connect-timeout 15 -m 300 -o "repo/$p" -w '%{http_code}' "$base/$p" 2>/dev/null || echo ERR)
+              code=$(curl -sSL --connect-timeout 15 -m 300 -o "repo/$p" -w '%{http_code}' "$u" 2>/dev/null || echo ERR)
               size=$(stat -c%s "repo/$p" 2>/dev/null || echo 0)
               if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then
                 echo "OK $p $size" >> log.txt
               else
                 rm -f "repo/$p"
-                echo "MISS $p code=$code" >> log.txt
+                echo "MISS $p code=$code url=$u" >> log.txt
               fi
             done
           fi
