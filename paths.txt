@@ -15,7 +15,6 @@ net/neoforged/accesstransformers/at-parser/13.0.1/at-parser-13.0.1.module
 net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.pom
 net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.jar
 net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.module
-net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11-all.jar
 net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.pom
 net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.jar
 net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.module
@@ -26,3 +25,6 @@ net/neoforged/srgutils/1.0.10/srgutils-1.0.10.module
 net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.pom
 net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.jar
 net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.module
+net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom|https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom
+net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module|https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module
+net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar|https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar
