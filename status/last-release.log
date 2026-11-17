@@ -1,29 +1,3 @@
-tag=artifacts-20261116-154936
-total 57208
--rw-r--r-- 1 runner runner   107707 Nov 16 15:49 AutoRenamingTool-2.0.17.jar
--rw-r--r-- 1 runner runner     5836 Nov 16 15:49 AutoRenamingTool-2.0.17.module
--rw-r--r-- 1 runner runner     2961 Nov 16 15:49 AutoRenamingTool-2.0.17.pom
--rw-r--r-- 1 runner runner     2016 Nov 16 15:49 SHA256SUMS.txt
--rw-r--r-- 1 runner runner     3082 Nov 16 15:49 _download.log
--rw-r--r-- 1 runner runner       30 Nov 16 15:49 _release.log
--rw-r--r-- 1 runner runner    18860 Nov 16 15:49 accesstransformers-13.0.1.jar
--rw-r--r-- 1 runner runner     4060 Nov 16 15:49 accesstransformers-13.0.1.module
--rw-r--r-- 1 runner runner     2589 Nov 16 15:49 accesstransformers-13.0.1.pom
--rw-r--r-- 1 runner runner    19698 Nov 16 15:49 at-parser-13.0.1.jar
--rw-r--r-- 1 runner runner     2690 Nov 16 15:49 at-parser-13.0.1.module
--rw-r--r-- 1 runner runner     1718 Nov 16 15:49 at-parser-13.0.1.pom
--rw-r--r-- 1 runner runner 57947018 Nov 16 15:49 jst-cli-bundle-2.0.11.jar
--rw-r--r-- 1 runner runner     1079 Nov 16 15:49 jst-cli-bundle-2.0.11.module
--rw-r--r-- 1 runner runner     1738 Nov 16 15:49 jst-cli-bundle-2.0.11.pom
--rw-r--r-- 1 runner runner   307933 Nov 16 15:49 neoform-runtime-2.0.31.jar
--rw-r--r-- 1 runner runner     7357 Nov 16 15:49 neoform-runtime-2.0.31.module
--rw-r--r-- 1 runner runner     3878 Nov 16 15:49 neoform-runtime-2.0.31.pom
--rw-r--r-- 1 runner runner    13476 Nov 16 15:49 problems-api-3.0.3.jar
--rw-r--r-- 1 runner runner     3682 Nov 16 15:49 problems-api-3.0.3.module
--rw-r--r-- 1 runner runner     1905 Nov 16 15:49 problems-api-3.0.3.pom
--rw-r--r-- 1 runner runner    72018 Nov 16 15:49 srgutils-1.0.10.jar
--rw-r--r-- 1 runner runner     3450 Nov 16 15:49 srgutils-1.0.10.module
--rw-r--r-- 1 runner runner     1646 Nov 16 15:49 srgutils-1.0.10.pom
-file_count=22
-https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261116-154936
+tag=artifacts-20261117-000939
+https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-000939
 rc=0
