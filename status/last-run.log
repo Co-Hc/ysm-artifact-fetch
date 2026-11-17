@@ -28,4 +28,7 @@ OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.module 368
 OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom 495
 OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module 101376
 MISS net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar code=404 url=https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar
--rw-r--r-- 1 runner runner 58832247 Nov 17 03:19 repo.zip
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.pom 753
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.jar 3352
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.module 2662
+-rw-r--r-- 1 runner runner 58837449 Nov 17 03:22 repo.zip
