@@ -1,5 +1,5 @@
-run: 43986542833
-time: 2026-11-17T00:18:40Z
+run: 44009343270
+time: 2026-11-17T03:19:24Z
 --- download ---
 OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom 3878
 OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar 307933
@@ -31,8 +31,8 @@ OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.module 368
 OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom 495
 OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module 101376
 MISS net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar code=404 url=https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar
--rw-r--r-- 1 runner runner 58832247 Nov 17 00:18 repo.zip
+-rw-r--r-- 1 runner runner 58832247 Nov 17 03:19 repo.zip
 --- release ---
-tag=artifacts-20261117-001834
-https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-001834
+tag=artifacts-20261117-031920
+https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-031920
 rc=0
