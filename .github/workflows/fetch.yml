@@ -21,6 +21,20 @@ jobs:
         run: |
           : > log.txt
           base="https://maven.neoforged.net/releases"
+
+          probe() {
+            u="$1"
+            code=$(curl -sSL --connect-timeout 15 -m 60 -o probe.out -w '%{http_code}' "$u" 2>/dev/null || echo ERR)
+            size=$(stat -c%s probe.out 2>/dev/null || echo 0)
+            echo "PROBE $code $size $u" >> log.txt
+            if [ "$code" = "200" ]; then head -c 300 probe.out >> log.txt; echo "" >> log.txt; fi
+          }
+
+          probe "$base/net/neoforged/minecraft-dependencies/"
+          probe "$base/net/neoforged/minecraft-dependencies/maven-metadata.xml"
+          probe "$base/net/neoforged/minecraft-dependencies/1.20.1/"
+          probe "$base/net/neoforged/minecraft-dependencies/1.21.1/"
+
           if [ -f paths.txt ]; then
             grep -vE '^[[:space:]]*#' paths.txt | grep -vE '^[[:space:]]*$' | while read -r p; do
               mkdir -p "repo/$(dirname "$p")"
@@ -34,10 +48,10 @@ jobs:
               fi
             done
           fi
-          (cd repo && find . -type f | sort > ../repo-files.txt)
-          (cd repo && xargs -a ../repo-files.txt sha256sum > ../SHA256SUMS.txt) 2>/dev/null || true
-          zip -qr repo.zip repo || echo "zip failed" >> log.txt
-          ls -l repo.zip >> log.txt || true
+          if [ -d repo ]; then (cd repo && find . -type f | sort > ../repo-files.txt); fi
+          if [ -d repo ]; then (cd repo && xargs -a ../repo-files.txt sha256sum > ../SHA256SUMS.txt) 2>/dev/null || true; fi
+          zip -qr repo.zip repo 2>/dev/null || echo "zip skipped" >> log.txt
+          ls -l repo.zip >> log.txt 2>/dev/null || true
 
       - name: Publish release
         if: always()
