@@ -1,6 +1,10 @@
-run: 43985315936
-time: 2026-11-17T00:09:44Z
+run: 43986053915
+time: 2026-11-17T00:15:04Z
 --- download ---
+PROBE 404 1235 https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/
+PROBE 404 1356 https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/maven-metadata.xml
+PROBE 404 1249 https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.20.1/
+PROBE 404 1249 https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/
 OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom 3878
 OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar 307933
 OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.module 7357
@@ -29,8 +33,8 @@ OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.module 3450
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.pom 1905
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.jar 13476
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.module 3682
--rw-r--r-- 1 runner runner 58828245 Nov 17 00:09 repo.zip
+-rw-r--r-- 1 runner runner 58828245 Nov 17 00:15 repo.zip
 --- release ---
-tag=artifacts-20261117-000939
-https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-000939
+tag=artifacts-20261117-001500
+https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-001500
 rc=0
