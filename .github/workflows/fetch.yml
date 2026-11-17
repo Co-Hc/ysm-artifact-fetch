@@ -16,72 +16,51 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download artifacts
+      - name: Download from neoforged
         continue-on-error: true
         run: |
-          mkdir -p out
-          : > out/_download.log
+          : > log.txt
           base="https://maven.neoforged.net/releases"
-
-          fetch() {
-            coord="$1"
-            g=$(echo "$coord" | cut -d: -f1)
-            a=$(echo "$coord" | cut -d: -f2)
-            v=$(echo "$coord" | cut -d: -f3)
-            path=$(echo "$g" | tr '.' '/')/$a/$v
-            for ext in pom jar module; do
-              name="$a-$v.$ext"
-              code=$(curl -sSL --connect-timeout 15 -m 300 -o "out/$name" -w '%{http_code}' "$base/$path/$name" 2>/dev/null || echo ERR)
-              size=$(stat -c%s "out/$name" 2>/dev/null || echo 0)
+          if [ -f paths.txt ]; then
+            grep -vE '^[[:space:]]*#' paths.txt | grep -vE '^[[:space:]]*$' | while read -r p; do
+              mkdir -p "repo/$(dirname "$p")"
+              code=$(curl -sSL --connect-timeout 15 -m 300 -o "repo/$p" -w '%{http_code}' "$base/$p" 2>/dev/null || echo ERR)
+              size=$(stat -c%s "repo/$p" 2>/dev/null || echo 0)
               if [ "$code" = "200" ] && [ "$size" -gt 0 ]; then
-                echo "OK  $coord $ext $size" >> out/_download.log
+                echo "OK $p $size" >> log.txt
               else
-                rm -f "out/$name"
+                rm -f "repo/$p"
+                echo "MISS $p code=$code" >> log.txt
               fi
             done
-          }
-
-          if [ -f coords.txt ]; then
-            grep -vE '^[[:space:]]*#' coords.txt | grep -vE '^[[:space:]]*$' | while read -r c; do fetch "$c"; done
           fi
-
-          sha256sum out/*.jar out/*.pom out/*.module 2>/dev/null > out/SHA256SUMS.txt || true
-          echo "---- files ----" >> out/_download.log
-          ls -l out >> out/_download.log
+          (cd repo && find . -type f | sort > ../repo-files.txt)
+          (cd repo && xargs -a ../repo-files.txt sha256sum > ../SHA256SUMS.txt) 2>/dev/null || true
+          zip -qr repo.zip repo || echo "zip failed" >> log.txt
+          ls -l repo.zip >> log.txt || true
 
       - name: Publish release
         if: always()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -u
-          : > out/_release.log
           TAG="artifacts-$(date -u +%Y%m%d-%H%M%S)"
-          echo "tag=$TAG" >> out/_release.log
-          ls -l out >> out/_release.log 2>&1 || true
-          files=()
-          for f in out/*; do
-            case "$f" in
-              out/_download.log|out/_release.log) continue ;;
-              *) files+=("$f") ;;
-            esac
-          done
-          echo "file_count=${#files[@]}" >> out/_release.log
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "no files, skip" >> out/_release.log
-            exit 0
+          echo "tag=$TAG" > release.log
+          if [ -f repo.zip ]; then
+            gh release create "$TAG" repo.zip SHA256SUMS.txt repo-files.txt \
+              --title "NeoForged repo mirror $TAG" \
+              --notes "可解压到本地 Maven 仓库的镜像包" >> release.log 2>&1
+            echo "rc=$?" >> release.log
+          else
+            echo "no repo.zip" >> release.log
           fi
-          gh release create "$TAG" "${files[@]}" \
-            --title "NeoForged artifacts $TAG" \
-            --notes "NeoForged 构件离线备份" >> out/_release.log 2>&1
-          echo "rc=$?" >> out/_release.log
 
-      - name: Report status to repo
+      - name: Report status
         if: always()
         run: |
           mkdir -p status
-          cp out/_download.log status/last-run.log 2>/dev/null || echo "no log" > status/last-run.log
-          cp out/_release.log status/last-release.log 2>/dev/null || echo "no log" > status/last-release.log
+          cp log.txt status/last-run.log 2>/dev/null || echo none > status/last-run.log
+          cp release.log status/last-release.log 2>/dev/null || echo none > status/last-release.log
           { echo "run: ${{ github.run_id }}"; echo "time: $(date -u +%Y-%m-%dT%H:%M:%SZ)"; echo "--- download ---"; cat status/last-run.log; echo "--- release ---"; cat status/last-release.log; } > status/summary.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
