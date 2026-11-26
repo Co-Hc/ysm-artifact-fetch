@@ -1,9 +1,11 @@
-run: 45800559813
-time: 2026-11-26T10:21:34Z
+run: 45819641880
+time: 2026-11-26T12:26:28Z
 --- download ---
-MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom
-MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module
--rw-r--r-- 1 runner runner 910 Nov 26 10:21 repo.zip
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.pom 753
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.jar 3352
+OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.module 2662
+-rw-r--r-- 1 runner runner 5674 Nov 26 12:26 repo.zip
 --- release ---
-tag=artifacts-20261126-102132
-HTTP 400: Bad Content-Length (https://uploads.github.com/repos/Co-Hc/ysm-artifact-fetch/releases/459249962/assets?label=&name=repo-files.txt)
+tag=artifacts-20261126-122625
+https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-122625
+rc=0
