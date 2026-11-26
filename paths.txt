@@ -1,2 +1,2 @@
-cpw/mods/bootstraplauncher/2.0.2/bootstraplauncher-2.0.2.pom
-cpw/mods/bootstraplauncher/2.0.2/bootstraplauncher-2.0.2.jar
+cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.pom
+cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.jar
