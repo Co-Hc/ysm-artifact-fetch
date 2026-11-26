@@ -1,4 +1,3 @@
-OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.pom 2667
-OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar 116486
-OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.module 4319
--rw-r--r-- 1 runner runner 107851 Nov 26 10:03 repo.zip
+OK net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.pom 2212
+OK net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.jar 261719
+-rw-r--r-- 1 runner runner 259659 Nov 26 10:07 repo.zip
