@@ -1,1 +1,1 @@
-net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18-all.jar
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar
