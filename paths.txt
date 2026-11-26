@@ -1,2 +1,3 @@
-cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.pom
-cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.jar
+cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.pom
+cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar
+cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.module
