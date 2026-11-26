@@ -1,4 +1,5 @@
-# 第二轮补：mergetool 已就位，补它的运行时依赖 srgutils 0.4.15
-net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.pom
-net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.jar
-net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.module
+# 第三轮补：mergetool 的 classifier 变体（fatjar/api/forge）
+net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-fatjar.jar
+net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-api.jar
+net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-forge.jar
+net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module
