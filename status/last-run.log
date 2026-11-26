@@ -1,5 +1,17 @@
-OK net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-fatjar.jar 467912
-OK net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-api.jar 2624
-OK net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-forge.jar 2028
-MISS net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module code=000ERR url=https://maven.neoforged.net/releases/net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module
--rw-r--r-- 1 runner runner 443846 Nov 26 08:26 repo.zip
+OK net/neoforged/mergetool/2.0.3/mergetool-2.0.3.pom 2577
+OK net/neoforged/mergetool/2.0.3/mergetool-2.0.3.jar 27937
+OK net/neoforged/mergetool/2.0.3/mergetool-2.0.3.module 4261
+OK net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.pom 2960
+OK net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.jar 103355
+OK net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.module 5822
+OK net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.pom 3054
+OK net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.jar 83543
+OK net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.module 4660
+MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom
+MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.jar code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.jar
+MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module
+MISS net/neoforged/mergetool/2.0.3/mergetool-2.0.3-fatjar.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged/mergetool/2.0.3/mergetool-2.0.3-fatjar.pom
+OK net/neoforged/mergetool/2.0.3/mergetool-2.0.3-fatjar.jar 467899
+MISS net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.pom
+MISS net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar code=000ERR url=https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar
+-rw-r--r-- 1 runner runner 646114 Nov 26 08:28 repo.zip
