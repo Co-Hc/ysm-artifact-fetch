@@ -1,5 +1,17 @@
-# 第三轮补：mergetool 的 classifier 变体（fatjar/api/forge）
-net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-fatjar.jar
-net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-api.jar
-net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7-forge.jar
-net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module
+# 第四轮：neoform 1.21.1 的运行时工具链（老版本）
+net/neoforged/mergetool/2.0.3/mergetool-2.0.3.pom
+net/neoforged/mergetool/2.0.3/mergetool-2.0.3.jar
+net/neoforged/mergetool/2.0.3/mergetool-2.0.3.module
+net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.pom
+net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.jar
+net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3.module
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.pom
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.jar
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2.module
+net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom
+net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.jar
+net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module
+net/neoforged/mergetool/2.0.3/mergetool-2.0.3-fatjar.pom
+net/neoforged/mergetool/2.0.3/mergetool-2.0.3-fatjar.jar
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.pom
+net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar
