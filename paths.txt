@@ -1,3 +1,2 @@
-cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.pom
-cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar
-cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.module
+net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.pom
+net/neoforged/fancymodloader/earlydisplay/4.0.43/earlydisplay-4.0.43.jar
