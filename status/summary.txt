@@ -1,10 +1,9 @@
-run: 45788398970
-time: 2026-11-26T09:03:15Z
+run: 45789812636
+time: 2026-11-26T09:12:32Z
 --- download ---
-OK net/neoforged/mergetool/2.0.3/mergetool-2.0.3-api.jar 2550
-OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247-sources.jar 1796948
--rw-r--r-- 1 runner runner 1518267 Nov 26 09:03 repo.zip
+OK net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18-all.jar 4479682
+-rw-r--r-- 1 runner runner 4248773 Nov 26 09:12 repo.zip
 --- release ---
-tag=artifacts-20261126-090311
-https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-090311
+tag=artifacts-20261126-091229
+https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-091229
 rc=0
