@@ -1,3 +1,4 @@
-OK net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.jar 28066
-MISS net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module code=000ERR url=https://maven.neoforged.net/releases/net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module
--rw-r--r-- 1 runner runner 25939 Nov 26 08:18 repo.zip
+OK net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.pom 1596
+OK net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.jar 69393
+MISS net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.module code=000ERR url=https://maven.neoforged.net/releases/net/minecraftforge/srgutils/0.4.15/srgutils-0.4.15.module
+-rw-r--r-- 1 runner runner 65545 Nov 26 08:23 repo.zip
