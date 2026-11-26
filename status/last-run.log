@@ -1,2 +1,18 @@
-OK net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar 5742231
--rw-r--r-- 1 runner runner 5173969 Nov 26 09:16 repo.zip
+OK net/neoforged/fancymodloader/loader/4.0.43/loader-4.0.43.jar 505633
+OK net/neoforged/mergetool/2.0.0/mergetool-2.0.0.jar 27937
+OK net/neoforged/mergetool/2.0.0/mergetool-2.0.0.pom 2486
+OK net/neoforged/coremods/7.0.3/coremods-7.0.3.jar 22659
+OK net/neoforged/coremods/7.0.3/coremods-7.0.3.pom 2787
+OK net/neoforged/bus/8.0.5/bus-8.0.5.jar 30340
+OK net/neoforged/bus/8.0.5/bus-8.0.5.pom 2136
+OK net/neoforged/JarJarSelector/0.4.1/JarJarSelector-0.4.1.jar 17168
+OK net/neoforged/JarJarSelector/0.4.1/JarJarSelector-0.4.1.pom 2833
+OK net/neoforged/JarJarMetadata/0.4.1/JarJarMetadata-0.4.1.jar 15648
+OK net/neoforged/JarJarMetadata/0.4.1/JarJarMetadata-0.4.1.pom 2653
+OK net/neoforged/JarJarFileSystems/0.4.1/JarJarFileSystems-0.4.1.jar 31807
+OK net/neoforged/JarJarFileSystems/0.4.1/JarJarFileSystems-0.4.1.pom 1726
+OK net/neoforged/accesstransformers/10.0.1/accesstransformers-10.0.1.jar 67234
+OK net/neoforged/accesstransformers/10.0.1/accesstransformers-10.0.1.pom 2742
+MISS net/neoforged.accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar code=404 url=https://maven.neoforged.net/releases/net/neoforged.accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar
+MISS net/neoforged.accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged.accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.pom
+-rw-r--r-- 1 runner runner 662880 Nov 26 09:46 repo.zip
