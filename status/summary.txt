@@ -1,12 +1,9 @@
-run: 45798864248
-time: 2026-11-26T10:10:53Z
+run: 45800559813
+time: 2026-11-26T10:21:34Z
 --- download ---
-OK net/neoforged/mergetool/2.0.0/mergetool-2.0.0-api.jar 2550
-OK net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.pom 2279
-OK net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar 2347
-OK net/neoforged/accesstransformers/at-modlauncher/11.0.1/at-modlauncher-11.0.1.jar 2314
--rw-r--r-- 1 runner runner 8873 Nov 26 10:10 repo.zip
+MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom
+MISS net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module code=404 url=https://maven.neoforged.net/releases/net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module
+-rw-r--r-- 1 runner runner 910 Nov 26 10:21 repo.zip
 --- release ---
-tag=artifacts-20261126-101050
-https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-101050
-rc=0
+tag=artifacts-20261126-102132
+HTTP 400: Bad Content-Length (https://uploads.github.com/repos/Co-Hc/ysm-artifact-fetch/releases/459249962/assets?label=&name=repo-files.txt)
