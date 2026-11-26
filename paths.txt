@@ -1,4 +1,2 @@
-net/neoforged/mergetool/2.0.0/mergetool-2.0.0-api.jar
-net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.pom
-net/neoforged/accesstransformers/at-modlauncher/10.0.1/at-modlauncher-10.0.1.jar
-net/neoforged/accesstransformers/at-modlauncher/11.0.1/at-modlauncher-11.0.1.jar
+net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.pom
+net/neoforged/minecraft-dependencies/1.21.1/minecraft-dependencies-1.21.1.module
