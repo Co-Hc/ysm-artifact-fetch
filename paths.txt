@@ -1,2 +1,1 @@
-net/neoforged/mergetool/2.0.3/mergetool-2.0.3-api.jar
-net/neoforged/neoforge/21.1.247/neoforge-21.1.247-sources.jar
+net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18-all.jar
