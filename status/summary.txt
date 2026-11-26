@@ -1,10 +1,8 @@
-run: 45783581553
-time: 2026-11-26T08:29:33Z
+run: 45784132382
+time: 2026-11-26T08:33:17Z
 --- download ---
-OK net/neoforged/AutoRenamingTool/2.0.3/AutoRenamingTool-2.0.3-all.jar 746919
 MISS net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar code=000ERR url=https://maven.neoforged.net/releases/net/neoforged/installertools/installertools/2.1.2/installertools-2.1.2-fatjar.jar
--rw-r--r-- 1 runner runner 676049 Nov 26 08:29 repo.zip
+-rw-r--r-- 1 runner runner 1132 Nov 26 08:33 repo.zip
 --- release ---
-tag=artifacts-20261126-082930
-https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-082930
-rc=0
+tag=artifacts-20261126-083316
+HTTP 400: Bad Content-Length (https://uploads.github.com/repos/Co-Hc/ysm-artifact-fetch/releases/459136708/assets?label=&name=repo-files.txt)
