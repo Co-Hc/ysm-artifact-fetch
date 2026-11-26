@@ -1,10 +1,11 @@
-run: 45796917274
-time: 2026-11-26T09:58:32Z
+run: 45797736335
+time: 2026-11-26T10:03:44Z
 --- download ---
-OK cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.pom 2141
-OK cpw/mods/securejarhandler/3.0.8/securejarhandler-3.0.8.jar 103765
--rw-r--r-- 1 runner runner 98683 Nov 26 09:58 repo.zip
+OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.pom 2667
+OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.jar 116486
+OK cpw/mods/modlauncher/11.0.5/modlauncher-11.0.5.module 4319
+-rw-r--r-- 1 runner runner 107851 Nov 26 10:03 repo.zip
 --- release ---
-tag=artifacts-20261126-095829
-https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-095829
+tag=artifacts-20261126-100341
+https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-100341
 rc=0
