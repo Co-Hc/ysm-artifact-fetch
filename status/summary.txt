@@ -1,41 +1,70 @@
-run: 44009747278
-time: 2026-11-17T03:22:52Z
+run: 45777311545
+time: 2026-11-26T07:42:57Z
 --- download ---
-OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.pom 3878
-OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.jar 307933
-OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31.module 7357
-OK net/neoforged/neoform-runtime/2.0.31/neoform-runtime-2.0.31-all.jar 4483539
-OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.pom 2961
-OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.jar 107707
-OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.module 5836
-OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17-all.jar 751270
-OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.pom 2589
-OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.jar 18860
-OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.module 4060
 OK net/neoforged/accesstransformers/at-parser/13.0.1/at-parser-13.0.1.pom 1718
 OK net/neoforged/accesstransformers/at-parser/13.0.1/at-parser-13.0.1.jar 19698
 OK net/neoforged/accesstransformers/at-parser/13.0.1/at-parser-13.0.1.module 2690
-OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.pom 1738
-OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.jar 57947018
-OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.module 1079
+OK net/neoforged/installertools/binarypatcher/4.0.12/binarypatcher-4.0.12.pom 2618
+OK net/neoforged/installertools/binarypatcher/4.0.12/binarypatcher-4.0.12.jar 37543
+OK net/neoforged/installertools/binarypatcher/4.0.12/binarypatcher-4.0.12.module 5168
+OK net/neoforged/installertools/cli-utils/2.1.4/cli-utils-2.1.4.pom 1663
+OK net/neoforged/installertools/cli-utils/2.1.4/cli-utils-2.1.4.jar 9379
+OK net/neoforged/installertools/cli-utils/2.1.4/cli-utils-2.1.4.module 3462
+OK net/neoforged/installertools/cli-utils/4.0.12/cli-utils-4.0.12.pom 1664
+OK net/neoforged/installertools/cli-utils/4.0.12/cli-utils-4.0.12.jar 7745
+OK net/neoforged/installertools/cli-utils/4.0.12/cli-utils-4.0.12.module 3474
 OK net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.pom 3775
 OK net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.jar 110522
 OK net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12.module 5985
-OK net/neoforged/installertools/installertools/4.0.12/installertools-4.0.12-fatjar.jar 813509
-OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.pom 1646
-OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.jar 72018
-OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.module 3450
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.pom 1905
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.jar 13476
 OK net/neoforged/installertools/problems-api/3.0.3/problems-api-3.0.3.module 3682
-OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.pom 495
-OK net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.module 101376
-MISS net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar code=404 url=https://maven.neoforged.net/mojang-meta/net/neoforged/minecraft-dependencies/1.20.1/minecraft-dependencies-1.20.1.jar
+OK net/neoforged/javadoctor/gson-io/2.0.17/gson-io-2.0.17.pom 2067
+OK net/neoforged/javadoctor/gson-io/2.0.17/gson-io-2.0.17.jar 5747
+OK net/neoforged/javadoctor/gson-io/2.0.17/gson-io-2.0.17.module 4163
+OK net/neoforged/javadoctor/spec/2.0.17/spec-2.0.17.pom 1666
+OK net/neoforged/javadoctor/spec/2.0.17/spec-2.0.17.jar 6266
+OK net/neoforged/javadoctor/spec/2.0.17/spec-2.0.17.module 3424
+OK net/neoforged/jst/jst-cli-bundle/2.0.6/jst-cli-bundle-2.0.6.pom 1737
+OK net/neoforged/jst/jst-cli-bundle/2.0.6/jst-cli-bundle-2.0.6.jar 57944672
+OK net/neoforged/jst/jst-cli-bundle/2.0.6/jst-cli-bundle-2.0.6.module 1076
+OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.pom 1738
+OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.jar 57947018
+OK net/neoforged/jst/jst-cli-bundle/2.0.11/jst-cli-bundle-2.0.11.module 1079
+OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.pom 2589
+OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.jar 18860
+OK net/neoforged/accesstransformers/13.0.1/accesstransformers-13.0.1.module 4060
+OK net/neoforged/AutoRenamingTool/2.0.16/AutoRenamingTool-2.0.16.pom 2961
+OK net/neoforged/AutoRenamingTool/2.0.16/AutoRenamingTool-2.0.16.jar 107707
+OK net/neoforged/AutoRenamingTool/2.0.16/AutoRenamingTool-2.0.16.module 5836
+OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.pom 2961
+OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.jar 107707
+OK net/neoforged/AutoRenamingTool/2.0.17/AutoRenamingTool-2.0.17.module 5836
 OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.pom 753
 OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.jar 3352
 OK net/neoforged/DevLaunch/1.0.2/DevLaunch-1.0.2.module 2662
--rw-r--r-- 1 runner runner 58837449 Nov 17 03:22 repo.zip
+OK net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18.pom 3877
+OK net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18.jar 304076
+OK net/neoforged/neoform-runtime/2.0.18/neoform-runtime-2.0.18.module 7356
+OK net/neoforged/srgutils/1.0.0/srgutils-1.0.0.pom 1645
+OK net/neoforged/srgutils/1.0.0/srgutils-1.0.0.jar 71421
+OK net/neoforged/srgutils/1.0.0/srgutils-1.0.0.module 3441
+OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.pom 1646
+OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.jar 72018
+OK net/neoforged/srgutils/1.0.10/srgutils-1.0.10.module 3450
+OK net/neoforged/neoform/1.21.1-20240808.144430/neoform-1.21.1-20240808.144430.pom 4460
+OK net/neoforged/neoform/1.21.1-20240808.144430/neoform-1.21.1-20240808.144430.module 5515
+OK net/neoforged/neoform/1.21.1-20240808.144430/neoform-1.21.1-20240808.144430.zip 1683830
+OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247.pom 7782
+OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247.module 20592
+OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247-universal.jar 3551263
+OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247-userdev.jar 3982206
+OK net/neoforged/neoforge/21.1.247/neoforge-21.1.247-moddev-config.json 10239
+OK net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.pom 2516
+MISS net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.jar code=000ERR url=https://maven.neoforged.net/releases/net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.jar
+MISS net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module code=000ERR url=https://maven.neoforged.net/releases/net/minecraftforge/mergetool/1.1.7/mergetool-1.1.7.module
+-rw-r--r-- 1 runner runner 114649609 Nov 26 07:42 repo.zip
 --- release ---
-tag=artifacts-20261117-032245
-https://github.com/chang6y54/ysm-artifact-fetch/releases/tag/artifacts-20261117-032245
+tag=artifacts-20261126-074249
+https://github.com/Co-Hc/ysm-artifact-fetch/releases/tag/artifacts-20261126-074249
 rc=0
